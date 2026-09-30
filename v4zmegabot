@@ -1,0 +1,25 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# v4zmegabot launcher — by V4Z RASHD
+APP_DIR="$HOME/.v4zmegabot/app"
+
+case "$1" in
+    --set-token)
+        echo -n "Paste bot token from @BotFather: "
+        read -r t
+        [ -z "$t" ] && { echo "No token given."; exit 1; }
+        mkdir -p "$HOME/.v4zmegabot"
+        echo "$t" > "$HOME/.v4zmegabot/token"
+        chmod 600 "$HOME/.v4zmegabot/token"
+        echo "✓ Token saved. Run 'v4zmegabot' to start the bot."
+        ;;
+    --help|-h)
+        echo "Usage: v4zmegabot [--set-token]"
+        echo "  (no args)   start the bot"
+        echo "  --set-token save/replace the @BotFather token"
+        ;;
+    *)
+        [ -f "$APP_DIR/megabot.py" ] || { echo "Bot not installed. Re-run the installer."; exit 1; }
+        termux-wake-lock 2>/dev/null
+        python "$APP_DIR/megabot.py"
+        ;;
+esac

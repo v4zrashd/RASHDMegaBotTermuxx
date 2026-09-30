@@ -1,0 +1,6 @@
+# Keep scripts executable and line endings sane
+*.sh text eol=lf
+v4zmegabot text eol=lf
+*.py text eol=lf
+*.jpg binary
+*.png binary
